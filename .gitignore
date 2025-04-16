@@ -32,6 +32,9 @@ out/
 /dist/
 /nbdist/
 /.nb-gradle/
+.DS_Store
+src/main/.DS_Store
+
 
 ### VS Code ###
 .vscode/
