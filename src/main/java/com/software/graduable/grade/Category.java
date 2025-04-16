@@ -2,8 +2,10 @@ package com.software.graduable.grade;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
 
 @JsonFormat(shape = JsonFormat.Shape.OBJECT)
+@Getter
 public enum Category {
     LIBERAL_COMPULSORY("교필"),
     LIBERAL_ELECTIVE_COMPULSORY("교선필"),
@@ -15,9 +17,6 @@ public enum Category {
     final private String status;
     Category(String status) {
         this.status = status;
-    }
-    public String getStatus() {
-        return this.status;
     }
 
     public static Category nameOf(String name) {
