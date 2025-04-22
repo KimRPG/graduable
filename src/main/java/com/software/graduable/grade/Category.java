@@ -1,10 +1,9 @@
 package com.software.graduable.grade;
 
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 
-@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 @Getter
 public enum Category {
     LIBERAL_COMPULSORY("교필"),
@@ -19,6 +18,10 @@ public enum Category {
         this.status = status;
     }
 
+    @JsonValue
+    public String getStatus() {
+        return status;
+    }
     public static Category nameOf(String name) {
         for (Category status : Category.values()) {
             if (status.getStatus().equals(name)) {
