@@ -13,6 +13,7 @@ public class GradeDTO {
     private int semesterCourseTaken;
     private String courseCode;
     private String courseName;
-    private Credit credit;
+    private int credit;
+    private Grade grade;
     private String subjectNote;
 }
