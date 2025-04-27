@@ -4,13 +4,18 @@ import com.software.graduable.course.Course;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 public class SimulatorDto {
 
-//    public class request{
-//        @Setter
-//        @Getter
-//        public static class
-//    }
+    public class request{
+        @Setter
+        @Getter
+        public static class graduateSimulation{
+            private String googleId;
+            private List<String> semesterList;
+        }
+    }
 
     public static class response{
         @Setter
@@ -38,6 +43,33 @@ public class SimulatorDto {
                 this.isEnglish = course.getCourseEnglish().equals("Y") ? Boolean.TRUE : Boolean.FALSE;
                 this.year = 1234567890L;
                 this.semester = 1234567890L;
+            }
+        }
+
+        @Getter
+        @Setter
+        public static class graduateSimulation{
+            private List<CategoryData> categoryData; // categoryData는 여러 개일 수 있으니까 List로
+            private Long totalCredit;
+            private Long attendedCredit;
+            private Double attendedCreditPercent;
+            private Double leftCreditPercent;
+
+            @Getter
+            @Setter
+            public static class CategoryData {
+                private String name;
+                private Long maxCredit;
+                private Long attendedCredit;
+                private Boolean isFinished;
+            }
+
+            public graduateSimulation(List<CategoryData> categoryData, Long totalCredit, Long attendedCredit, Double attendedCreditPercent, Double leftCreditPercent) {
+                this.categoryData = categoryData;
+                this.totalCredit = totalCredit;
+                this.attendedCredit = attendedCredit;
+                this.attendedCreditPercent = attendedCreditPercent;
+                this.leftCreditPercent = leftCreditPercent;
             }
         }
     }
