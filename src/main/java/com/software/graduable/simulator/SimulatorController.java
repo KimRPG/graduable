@@ -29,4 +29,10 @@ public class SimulatorController {
         SimulatorDto.response.graduateSimulation response = simulatorService.graduateSimulation(request);
         return ResponseEntity.ok(response);
     }
+
+    @PostMapping("/saveToRoadmap")
+    public ResponseEntity<?> saveToRoadmap(@RequestBody SimulatorDto.request.saveToRoadmap request){
+        simulatorService.saveToRoadmap(request);
+        return ResponseEntity.ok(true);
+    }
 }

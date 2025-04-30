@@ -5,6 +5,7 @@ import com.software.graduable.course.CourseJPA;
 import com.software.graduable.grade.GradeEntity;
 import com.software.graduable.grade.enumFile.Grade;
 import com.software.graduable.plannedCourse.PlannedCourse;
+import com.software.graduable.plannedCourse.PlannedCourseJPA;
 import com.software.graduable.user.User;
 import com.software.graduable.user.UserJPA;
 import lombok.RequiredArgsConstructor;
@@ -16,8 +17,24 @@ import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
 public class SimulatorService {
+    private final PlannedCourseJPA plannedCourseJPA;
     private final CourseJPA courseJPA;
     private final UserJPA userJPA;
+
+    public void saveToRoadmap(SimulatorDto.request.saveToRoadmap request) {
+        User user = userJPA.findByGoogleId(request.getGoogleId());
+        List<String> courseIdList = request.getCourseIdList();
+        String semester = request.getSemester();
+
+        for (String courseIdStr : courseIdList) {
+            Long courseId = Long.parseLong(courseIdStr);
+            Course course = courseJPA.findById(courseId)
+                    .orElseThrow(() -> new RuntimeException("과목 없음 (ID: " + courseId + ")"));
+
+            PlannedCourse plannedCourse = new PlannedCourse(user, semester, courseId);
+            plannedCourseJPA.save(plannedCourse); // 여기서 영속화
+        }
+    }
 
     public SimulatorDto.response.search findSubjectByName(String name){
         Course course = courseJPA.findByCourseName(name)

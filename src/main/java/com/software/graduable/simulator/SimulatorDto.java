@@ -15,6 +15,14 @@ public class SimulatorDto {
             private String googleId;
             private List<String> semesterList;
         }
+
+        @Getter
+        @Setter
+        public static class saveToRoadmap{
+            private String googleId;
+            private List<String> courseIdList;
+            private String semester;
+        }
     }
 
     public static class response{
