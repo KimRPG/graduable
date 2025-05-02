@@ -24,7 +24,7 @@ public class SimulatorService {
     public void saveToRoadmap(SimulatorDto.request.saveToRoadmap request) {
         User user = userJPA.findByGoogleId(request.getGoogleId());
         List<String> courseIdList = request.getCourseIdList();
-        String semester = request.getSemester();
+        Long semester = request.getSemester();
 
         for (String courseIdStr : courseIdList) {
             Long courseId = Long.parseLong(courseIdStr);
