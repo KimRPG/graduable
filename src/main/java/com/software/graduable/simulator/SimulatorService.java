@@ -51,19 +51,19 @@ public class SimulatorService {
                 .filter(plannedCourse -> semesterList.contains(plannedCourse.getSemester()))
                 .toList();
 
-        Map<String, Long> categoryMaxCredits = Map.of(
-                "신앙및세계관", 9L,
-                "인성및리더십", 6L,
-                "실무영어", 9L,
-                "전문교양", 5L,
-                "BSM", 18L,
-                "ICT융합기초", 2L,
-                "자유선택(교양)", 9L,
-                "자유선택(교양또는비교양)", 0L,
-                "전공주제(AI컴퓨터심화)", 60L
+        Map<String, Double> categoryMaxCredits = Map.of(
+                "신앙및세계관", 9.0,
+                "인성및리더십", 6.0,
+                "실무영어", 9.0,
+                "전문교양", 5.0,
+                "BSM", 18.0,
+                "ICT융합기초", 2.0,
+                "자유선택(교양)", 9.0,
+                "자유선택(교양또는비교양)", 0.0,
+                "전공주제(AI컴퓨터심화)", 60.0
         );
 
-        Map<String, Long> categoryAttendedCredits = new HashMap<>();
+        Map<String, Double> categoryAttendedCredits = new HashMap<>();
         for (PlannedCourse course : filteredCourses) {
             Course courseEntity = courseJPA.findById(course.getCourseId())
                     .orElseThrow(() -> new RuntimeException("해당 과목 없음 (ID: " + course.getCourseId() + ")"));
@@ -71,19 +71,19 @@ public class SimulatorService {
             String category = courseEntity.getCourseCategory();
 
             System.out.println(category);
-            Long credit = courseJPA.findById(course.getCourseId()).get().getCredit();
+            Double credit = courseJPA.findById(course.getCourseId()).get().getCredit();
 
             categoryAttendedCredits.put(
                     category,
-                    categoryAttendedCredits.getOrDefault(category, 0L) + credit
+                    categoryAttendedCredits.getOrDefault(category, 0.0) + credit
             );
         }
 
         List<SimulatorDto.response.graduateSimulation.CategoryData> categoryDataList = new ArrayList<>();
         for (String category : categoryAttendedCredits.keySet()) {
-            Long attended = categoryAttendedCredits.get(category);
+            Double attended = categoryAttendedCredits.get(category);
             System.out.println(category + " : " + attended);
-            Long max = categoryMaxCredits.getOrDefault(category, attended); // maxCredit 없으면 그대로 사용
+            Double max = categoryMaxCredits.getOrDefault(category, attended); // maxCredit 없으면 그대로 사용
             boolean isFinished = attended >= max;
 
             SimulatorDto.response.graduateSimulation.CategoryData categoryData = new SimulatorDto.response.graduateSimulation.CategoryData();
@@ -96,8 +96,8 @@ public class SimulatorService {
         }
 
         // 총합 계산
-        Long totalMaxCredit = 130L;
-        Long totalAttendedCredit = categoryDataList.stream().mapToLong(SimulatorDto.response.graduateSimulation.CategoryData::getAttendedCredit).sum();
+        Double totalMaxCredit = 130.0;
+        Double totalAttendedCredit = categoryDataList.stream().mapToDouble(SimulatorDto.response.graduateSimulation.CategoryData::getAttendedCredit).sum();
 
         double attendedPercent = (totalMaxCredit == 0) ? 0.0 : (totalAttendedCredit * 100.0 / totalMaxCredit);
         double leftPercent = 100.0 - attendedPercent;
