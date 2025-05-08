@@ -5,20 +5,26 @@ import java.util.*;
 
 public class GradeDTOMapper {
 
-    public List<GradeDTO> parse(String text) throws Exception {
+    public List<GradeDTO> parseGradeDTO(String text) throws Exception {
         List<GradeDTO> gradeList = new ArrayList<>();
         BufferedReader reader = new BufferedReader(new StringReader(text));
         String line;
-
+        Classification classification = null;
         while ((line = reader.readLine()) != null) {
-            Optional<GradeDTO> maybeDto = parseLine(line);
+            line = line.strip();
+            Optional<Classification> maybeClassification = Classification.nameOf(line);
+            if (maybeClassification.isPresent()) {
+                classification = maybeClassification.get();
+                continue; // 다음 줄로 넘어감
+            }
+            Optional<GradeDTO> maybeDto = parseLine(line,classification);
             maybeDto.ifPresent(gradeList::add);
         }
 
         return gradeList;
     }
 
-    private Optional<GradeDTO> parseLine(String line) {
+    private Optional<GradeDTO> parseLine(String line, Classification classification) {
         String[] tokens = line.split("\t");
         if (tokens.length < 7) return Optional.empty();
 
@@ -31,7 +37,8 @@ public class GradeDTOMapper {
 
         return Optional.of(
                 GradeDTO.builder()
-                        .classification(category)
+                        .classification(classification)
+                        .category(category)
                         .yearCourseTaken(parseInt(tokens[1]))
                         .semesterCourseTaken(parseInt(tokens[2]))
                         .courseCode(tokens[3].trim())

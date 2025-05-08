@@ -8,8 +8,10 @@ import lombok.Setter;
 @Setter
 @Builder
 public class GradeDTO {
+    //항목
+    private Classification classification;
     //구분
-    private Category classification;
+    private Category category;
     // 연도
     private int yearCourseTaken;
     // 학기
