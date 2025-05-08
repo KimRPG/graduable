@@ -11,7 +11,6 @@ public class GradeDTOMapper {
         String line;
 
         while ((line = reader.readLine()) != null) {
-            System.out.println(line + "\n");
             Optional<GradeDTO> maybeDto = parseLine(line);
             maybeDto.ifPresent(gradeList::add);
         }

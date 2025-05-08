@@ -15,9 +15,8 @@ public enum Grade {
     C("C0", 2.0),
     D_PLUS("D+", 1.5),
     D("D0", 1.0),
-    F("F", 0),
-    P("P", 0),
-    ;
+    Fail("F", 0),
+    Pass("P", 0);
 
     final private String status;
     final private double point;
