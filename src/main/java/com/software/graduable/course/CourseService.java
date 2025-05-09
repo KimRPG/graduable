@@ -1,5 +1,6 @@
 package com.software.graduable.course;
 
+import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class CourseService {
         return courseJPA.findAll();
     }
 
+    @PostConstruct
     public void insertAllData(){
         List<Course> courseList = new ArrayList<>();
 
