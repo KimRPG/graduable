@@ -47,10 +47,15 @@ public class SimulatorDto {
                 this.credit = course.getCredit();
                 this.room = course.getCourseLectureRoom();
                 this.professor = course.getCourseProfessor();
-                this.gradeType = course.getCourseGradingType().equals("Grade") ? Boolean.TRUE : Boolean.FALSE;
-                this.isEnglish = course.getCourseEnglish().equals("Y") ? Boolean.TRUE : Boolean.FALSE;
-                this.year = 1234567890L;
-                this.semester = 1234567890L;
+                this.gradeType = null;
+                this.isEnglish = null;
+                this.year = null;
+                this.semester = null;
+
+//                this.gradeType = course.getCourseGradingType().equals("Grade") ? Boolean.TRUE : Boolean.FALSE;
+//                this.isEnglish = course.getCourseEnglish().equals("Y") ? Boolean.TRUE : Boolean.FALSE;
+//                this.year = 1234567890L;
+//                this.semester = 1234567890L;
             }
         }
 
