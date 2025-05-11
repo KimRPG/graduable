@@ -36,10 +36,16 @@ public class SimulatorService {
         }
     }
 
-    public SimulatorDto.response.search findSubjectByName(String name){
-        return courseJPA.findByCourseName(name)
+    public List<SimulatorDto.response.search> findSubjectByName(String name) {
+        List<Course> courses = courseJPA.findByCourseNameContainingIgnoreCase(name);
+
+        if (courses.isEmpty()) {
+            throw new NoSuchElementException("해당 과목이 없습니다.");
+        }
+
+        return courses.stream()
                 .map(SimulatorDto.response.search::new)
-                .orElse(null);
+                .collect(Collectors.toList());
     }
 
     public SimulatorDto.response.graduateSimulation graduateSimulation(SimulatorDto.request.graduateSimulation request){

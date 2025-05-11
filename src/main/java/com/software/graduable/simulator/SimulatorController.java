@@ -9,6 +9,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/simulator")
@@ -20,16 +22,13 @@ public class SimulatorController {
 
     @GetMapping("/search")
 //    @Operation(summary = "과목 정보 조회하기 기능", description = "name으로 과목 이름을 보내주면 해당 과목의 정보를 받습니다.")
-    public ResponseEntity<?> findSubjectByName(@RequestParam String name) {
-        SimulatorDto.response.search response = simulatorService.findSubjectByName(name);
-
-        if (response == null) {
-            return ResponseEntity
-                    .status(HttpStatus.NOT_FOUND)
-                    .body("해당 과목이 존재하지 않습니다: " + name);
+    public ResponseEntity<?> findSubject(@RequestParam String name) {
+        try {
+            List<SimulatorDto.response.search> result = simulatorService.findSubjectByName(name);
+            return ResponseEntity.ok(result);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
-        return ResponseEntity.ok(response);
     }
 
     @PostMapping("/graduateSimulation")
