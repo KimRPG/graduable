@@ -23,11 +23,10 @@ public class SimulatorService {
 
     public void saveToRoadmap(SimulatorDto.request.saveToRoadmap request) {
         User user = userJPA.findByGoogleId(request.getGoogleId());
-        List<String> courseIdList = request.getCourseIdList();
+        List<Long> courseIdList = request.getCourseIdList();
         Long semester = request.getSemester();
 
-        for (String courseIdStr : courseIdList) {
-            Long courseId = Long.parseLong(courseIdStr);
+        for (Long courseId : courseIdList) {
             Course course = courseJPA.findById(courseId)
                     .orElseThrow(() -> new RuntimeException("과목 없음 (ID: " + courseId + ")"));
 
