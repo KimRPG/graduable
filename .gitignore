@@ -38,3 +38,6 @@ src/main/.DS_Store
 
 ### VS Code ###
 .vscode/
+
+*.yml
+*.properties
