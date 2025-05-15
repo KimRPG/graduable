@@ -50,7 +50,7 @@ public class SimulatorService {
     public SimulatorDto.response.graduateSimulation graduateSimulation(SimulatorDto.request.graduateSimulation request){
         User user = userJPA.findByGoogleId(request.getGoogleId());
 
-        List<String> semesterList = request.getSemesterList();
+        List<Long> semesterList = request.getSemesterList();
 
         List<PlannedCourse> filteredCourses = user.getPlannedCourseList().stream()
                 .filter(plannedCourse -> semesterList.contains(plannedCourse.getSemester()))

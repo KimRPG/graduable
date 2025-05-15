@@ -13,7 +13,7 @@ public class SimulatorDto {
         @Getter
         public static class graduateSimulation{
             private String googleId;
-            private List<String> semesterList;
+            private List<Long> semesterList;
         }
 
         @Getter
