@@ -1,5 +1,9 @@
 package com.software.graduable.grade;
 
+import com.software.graduable.grade.dto.GradeDTO;
+import com.software.graduable.grade.enumFile.Category;
+import com.software.graduable.grade.enumFile.Classification;
+import com.software.graduable.grade.service.GradeDTOMapper;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

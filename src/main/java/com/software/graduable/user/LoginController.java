@@ -1,5 +1,6 @@
 package com.software.graduable.user;
 
+import com.software.graduable.grade.service.GradeService;
 import com.software.graduable.user.dto.UserDTO;
 import com.software.graduable.user.dto.UserInfoDTO;
 import jakarta.persistence.GeneratedValue;
@@ -13,9 +14,10 @@ import org.springframework.web.bind.annotation.*;
 public class LoginController {
 
     private final UserService service;
+    private final GradeService gradeService;
 
     @PostMapping("/user/sign_up")
-    public void signUp(@RequestBody UserDTO dto) {
+    public void signUp(@RequestBody UserDTO dto)  {
         service.userSignUp(dto);
     }
 

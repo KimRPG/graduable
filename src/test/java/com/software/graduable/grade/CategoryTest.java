@@ -1,5 +1,6 @@
 package com.software.graduable.grade;
 
+import com.software.graduable.grade.enumFile.Category;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 

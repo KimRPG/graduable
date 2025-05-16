@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 public class UserInfoDTO {
     private String userName;    // 유저 이름
     private String userNickname;    // 유저 닉네임
-    private String userSemester;    // 유저 현 학기 수
+    private int userSemester;    // 유저 현 학기 수
     private String googleId;
     private String email;
 

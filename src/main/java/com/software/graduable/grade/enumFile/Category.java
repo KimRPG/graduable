@@ -1,4 +1,4 @@
-package com.software.graduable.grade;
+package com.software.graduable.grade.enumFile;
 
 
 import com.fasterxml.jackson.annotation.JsonValue;
