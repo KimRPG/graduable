@@ -1,5 +1,8 @@
-package com.software.graduable.grade;
+package com.software.graduable.grade.dto;
 
+import com.software.graduable.grade.enumFile.Category;
+import com.software.graduable.grade.enumFile.Classification;
+import com.software.graduable.grade.enumFile.Grade;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;

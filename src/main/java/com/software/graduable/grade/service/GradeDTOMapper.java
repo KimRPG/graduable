@@ -1,9 +1,15 @@
-package com.software.graduable.grade;
+package com.software.graduable.grade.service;
+
+import com.software.graduable.grade.dto.GradeDTO;
+import com.software.graduable.grade.enumFile.Category;
+import com.software.graduable.grade.enumFile.Classification;
+import com.software.graduable.grade.enumFile.Grade;
 
 import java.io.*;
 import java.util.*;
 
 public class GradeDTOMapper {
+
 
     public List<GradeDTO> parseGradeDTO(String text) throws Exception {
         List<GradeDTO> gradeList = new ArrayList<>();
