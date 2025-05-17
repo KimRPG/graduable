@@ -27,4 +27,5 @@ public class Course {
     private String courseGradingType;   // Grade인지 P/F인지 ex) Grade
     private String courseProfessor; // 교수님 성함 ex) JC
     private String courseEnglish;   // 영어 여부 ex) Y
+    private String courseCategory; // 졸업 구분 (신앙및세계관, 인성및리더십, 실무영어, 전문교양, BSM, ICT융합기초, 자유교양(선택), 전공주제(AI컴퓨터심화))
 }
