@@ -1,12 +1,16 @@
 package com.software.graduable.global.exception;
 
 import com.software.graduable.global.exception.exceptions.*;
+import com.software.graduable.grade.controller.GradeController;
+import com.software.graduable.simulator.SimulatorController;
+import com.software.graduable.user.LoginController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-@RestControllerAdvice
+//@RestControllerAdvice(annotations = {RestController.class}, basePackageClasses = {GradeController.class, SimulatorController.class, LoginController.class})
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
