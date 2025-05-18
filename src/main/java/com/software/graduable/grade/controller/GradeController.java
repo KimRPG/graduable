@@ -29,4 +29,9 @@ public class GradeController {
             @PathVariable String googleId) throws Exception {
         return gradeService.getAllGrades(googleId);
     }
+
+    @DeleteMapping("/{googleId}")
+    public void deleteAllGrades(@PathVariable String googleId) {
+        gradeService.deleteAllGrades(googleId);
+    }
 } 

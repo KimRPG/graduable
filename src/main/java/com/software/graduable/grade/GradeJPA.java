@@ -5,6 +5,7 @@ import com.software.graduable.grade.enumFile.Classification;
 import com.software.graduable.grade.enumFile.Grade;
 import com.software.graduable.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -34,4 +35,9 @@ public interface GradeJPA extends JpaRepository<GradeEntity, Long> {
     // 사용자의 특정 카테고리 이수 학점 계산
     @Query("SELECT SUM(g.credit) FROM GradeEntity g WHERE g.user = :user AND g.category = :category")
     int calculateCategoryCredits(@Param("user") User user, @Param("category") Category category);
+
+    // 사용자의 모든 성적 삭제
+    @Modifying
+    @Query("DELETE FROM GradeEntity g WHERE g.user = :user")
+    void deleteAllByUser(@Param("user") User user);
 } 
