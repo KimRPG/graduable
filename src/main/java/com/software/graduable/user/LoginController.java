@@ -9,6 +9,8 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class LoginController {
@@ -24,5 +26,10 @@ public class LoginController {
     @GetMapping("/user/info/{googleId}")
     public UserInfoDTO info(@PathVariable("googleId") String id) {
         return service.getUserInfo(id);
+    }
+
+    @GetMapping("/user/info")
+    public List<UserInfoDTO> userInfoDTOList() {
+        return service.getUsersInfo();
     }
 }
