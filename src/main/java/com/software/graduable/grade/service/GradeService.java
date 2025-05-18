@@ -106,4 +106,14 @@ public class GradeService {
         }
         return gradeJPA.calculateCategoryCredits(user, category);
     }
+
+    // 사용자의 모든 성적 삭제
+    @Transactional
+    public void deleteAllGrades(String googleId) {
+        User user = userJPA.findByGoogleId(googleId);
+        if (user == null) {
+            throw new InvalidUserDataException("존재하지 않는 사용자입니다: " + googleId);
+        }
+        gradeJPA.deleteAllByUser(user);
+    }
 } 
