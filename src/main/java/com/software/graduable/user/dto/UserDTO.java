@@ -16,7 +16,7 @@ public class UserDTO {
     public UserDTO toDto(User user) {
         return UserDTO.builder()
                 .userName(user.getUserName())
-                .userName(user.getUserNickname())
+                .userNickname(user.getUserNickname())
                 .userSemester(user.getUserSemester())
                 .googleId(user.getGoogleId())
                 .email(user.getEmail())

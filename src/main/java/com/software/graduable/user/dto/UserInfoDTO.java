@@ -20,7 +20,7 @@ public class UserInfoDTO {
     public static UserInfoDTO toDto(User user) {
         return UserInfoDTO.builder()
                 .userName(user.getUserName())
-                .userName(user.getUserNickname())
+                .userNickname(user.getUserNickname())
                 .userSemester(user.getUserSemester())
                 .googleId(user.getGoogleId())
                 .email(user.getEmail())
