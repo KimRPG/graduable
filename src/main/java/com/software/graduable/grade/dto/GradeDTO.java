@@ -24,7 +24,7 @@ public class GradeDTO {
     // 과목명
     private String courseName;
     // 학점(설계)
-    private int credit;
+    private Double credit;
     // 성적
     private Grade grade;
     // 비고

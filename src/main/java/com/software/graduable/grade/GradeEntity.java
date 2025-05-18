@@ -31,7 +31,7 @@ public class GradeEntity {
     private int semesterCourseTaken;  // 학기
     private String courseCode;  // 과목코드
     private String courseName;  // 과목명
-    private int credit;  // 학점(설계)
+    private Double credit;  // 학점(설계)
 
     @Column(name = "grade")
     private String grade;  // 성적

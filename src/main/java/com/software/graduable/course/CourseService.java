@@ -21,15 +21,15 @@ public class CourseService {
         List<Course> courseList = new ArrayList<>();
 
         // 신앙
-        courseList.add(new Course("채플 1", "GEK10001", "교필", 0.0, "신앙및세계관"));
-        courseList.add(new Course("채플 2", "GEK10002", "교필", 0.0, "신앙및세계관"));
-        courseList.add(new Course("채플 3", "GEK20001", "교필", 0.0, "신앙및세계관"));
-        courseList.add(new Course("채플 4", "GEK20002", "교필", 0.0, "신앙및세계관"));
-        courseList.add(new Course("채플 5", "GEK30001", "교필", 0.0, "신앙및세계관"));
-        courseList.add(new Course("채플 6", "GEK30002", "교필", 0.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 1", "GEK10001", "교필", 0.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 2", "GEK10002", "교필", 0.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 3", "GEK20001", "교필", 0.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 4", "GEK20002", "교필", 0.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 5", "GEK30001", "교필", 0.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 6", "GEK30002", "교필", 0.0, "신앙및세계관"));
 
-        courseList.add(new Course("채플 7", "GEK40001", "교선", 1.0, "신앙및세계관"));
-        courseList.add(new Course("채플 8", "GEK40002", "교선", 1.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 7", "GEK40001", "교선", 1.0, "신앙및세계관"));
+        courseList.add(new Course("채플(한국어) 8", "GEK40002", "교선", 1.0, "신앙및세계관"));
 
         courseList.add(new Course("성경의 이해", "GEK20058", "교선필", 2.0, "신앙및세계관"));
         courseList.add(new Course("성경과 삶", "GEK20063", "교선필", 2.0, "신앙및세계관"));
@@ -55,14 +55,14 @@ public class CourseService {
         courseList.add(new Course("성서해석학", "GEK20070", "교선필", 3.0, "신앙및세계관"));
 
         // 인성및리더십
-        courseList.add(new Course("공동체 리더십 훈련 1", "GEK10008", "교필", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 2", "GEK10009", "교필", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 3", "GEK20008", "교필", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 4", "GEK20009", "교필", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 5", "GEK30008", "교필", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 6", "GEK30009", "교필", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 7", "GEK40008", "교선", 0.5, "인성및리더십"));
-        courseList.add(new Course("공동체 리더십 훈련 8", "GEK40009", "교선", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련1", "GEK10008", "교필", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련2", "GEK10009", "교필", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련3", "GEK20008", "교필", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련4", "GEK20009", "교필", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련5", "GEK30008", "교필", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련6", "GEK30009", "교필", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련7", "GEK40008", "교선", 0.5, "인성및리더십"));
+        courseList.add(new Course("공동체리더십훈련8", "GEK40009", "교선", 0.5, "인성및리더십"));
 
         courseList.add(new Course("한동인성교육", "GEK10015", "교필", 1.0, "인성및리더십"));
 
@@ -93,10 +93,10 @@ public class CourseService {
         courseList.add(new Course("심리학개론", "CSW10003", "교선필", 3.0, "전문교양"));
 
         // BSM
-        courseList.add(new Course("물리학개론", "GEK10090", "교선필", 3.0, "BSM"));
+        courseList.add(new Course("물리학 개론", "GEK10090", "교선필", 3.0, "BSM"));
         courseList.add(new Course("물리학 1", "GEK10055", "교선필", 3.0, "BSM"));
         courseList.add(new Course("물리학 2", "GEK10056", "교선필", 3.0, "BSM"));
-        courseList.add(new Course("물리학실험 1", "GEK10038", "교선필", 1.0, "BSM"));
+        courseList.add(new Course("물리학실험1", "GEK10038", "교선필", 1.0, "BSM"));
         courseList.add(new Course("일반생물학", "GEK10057", "교선필", 3.0, "BSM"));
         courseList.add(new Course("일반화학", "GEK10058", "교선필", 3.0, "BSM"));
         courseList.add(new Course("일반화학실험", "GEK10094", "교선필", 1.0, "BSM"));
@@ -112,7 +112,7 @@ public class CourseService {
         courseList.add(new Course("실해석학개론", "CCE20011", "교선필", 3.0, "BSM"));
 
         // ICT융합기초
-        courseList.add(new Course("소프트웨어입문", "GCS10001", "교선필", 2.0, "ICT융합기초"));
+        courseList.add(new Course("소프트웨어 입문", "GCS10001", "교선필", 2.0, "ICT융합기초"));
         courseList.add(new Course("R 을 이용한 빅데이터 분석", "GCS10080", "교선필", 3.0, "ICT융합기초"));
         courseList.add(new Course("파이썬 프로그래밍", "GCS10004", "교선필", 3.0, "ICT융합기초"));
         courseList.add(new Course("AI 데이터입문", "GCS20012", "교선필", 3.0, "ICT융합기초"));
@@ -145,9 +145,6 @@ public class CourseService {
         courseList.add(new Course("생성형AI를 활용한 문제해결 프로그래밍", "GCS20014", "교선필", 3.0, "자유선택(교양)"));
         courseList.add(new Course("한국어5", "GCS20054", "교선필", 3.0, "자유선택(교양)"));
         courseList.add(new Course("한국어6", "GCS20055", "교선필", 3.0, "자유선택(교양)"));
-        courseList.add(new Course("하이브리드웹 설계", "GCS20009", "교선필", 2.0, "자유선택(교양)"));
-        courseList.add(new Course("생활 속의 AI", "GCS20013", "교선필", 3.0, "자유선택(교양)"));
-        courseList.add(new Course("생성형AI를 활용한 문제해결 프로그래밍", "GCS20014", "교선필", 3.0, "자유선택(교양)"));
         courseList.add(new Course("한국어5", "GCS20054", "교선필", 3.0, "자유선택(교양)"));
         courseList.add(new Course("한국어6", "GCS20055", "교선필", 3.0, "자유선택(교양)"));
         courseList.add(new Course("Essentials of English Communication", "GCS40001", "교선", 3.0, "자유선택(교양)"));
