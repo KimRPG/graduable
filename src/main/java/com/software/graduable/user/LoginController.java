@@ -32,4 +32,9 @@ public class LoginController {
     public List<UserInfoDTO> userInfoDTOList() {
         return service.getUsersInfo();
     }
+
+    @PutMapping("/user/info/{googleId}")
+    public UserInfoDTO userSemesterChange(@PathVariable String googleId, @RequestParam Integer semester) {
+        return service.putUserSemesterChange(googleId,semester);
+    }
 }

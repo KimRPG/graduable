@@ -5,11 +5,13 @@ import com.software.graduable.user.dto.UserInfoDTO;
 import com.software.graduable.global.exception.exceptions.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class UserService {
     private final UserJPA jpa;
 
@@ -37,5 +39,14 @@ public class UserService {
 
     public List<UserInfoDTO> getUsersInfo() {
         return jpa.findAll().stream().map(UserInfoDTO::toDto).toList();
+    }
+
+    public UserInfoDTO putUserSemesterChange(String googleId, int semester) {
+        jpa.updateUserSemester(googleId, semester);
+        User user = jpa.findByGoogleId(googleId);
+        if (user == null) {
+            throw new UserNotFoundException("사용자를 찾을 수 없습니다: " + googleId);
+        }
+        return getUserInfo(googleId);
     }
 }
