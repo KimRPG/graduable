@@ -37,10 +37,9 @@ public class SimulatorService {
     }
 
     public SimulatorDto.response.search findSubjectByName(String name){
-        Course course = courseJPA.findByCourseName(name)
-                .orElseThrow(() -> new RuntimeException("해당 과목 없음."));
-
-        return new SimulatorDto.response.search(course);
+        return courseJPA.findByCourseName(name)
+                .map(SimulatorDto.response.search::new)
+                .orElse(null);
     }
 
     public SimulatorDto.response.graduateSimulation graduateSimulation(SimulatorDto.request.graduateSimulation request){
