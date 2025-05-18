@@ -17,7 +17,7 @@ public class UserInfoDTO {
     private String googleId;
     private String email;
 
-    public UserInfoDTO toDto(User user) {
+    public static UserInfoDTO toDto(User user) {
         return UserInfoDTO.builder()
                 .userName(user.getUserName())
                 .userName(user.getUserNickname())

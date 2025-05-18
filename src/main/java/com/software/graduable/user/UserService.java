@@ -6,6 +6,8 @@ import com.software.graduable.global.exception.exceptions.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class UserService {
@@ -31,5 +33,9 @@ public class UserService {
             throw new UserNotFoundException("사용자를 찾을 수 없습니다: " + googleId);
         }
         return new UserInfoDTO().toDto(user);
+    }
+
+    public List<UserInfoDTO> getUsersInfo() {
+        return jpa.findAll().stream().map(UserInfoDTO::toDto).toList();
     }
 }
