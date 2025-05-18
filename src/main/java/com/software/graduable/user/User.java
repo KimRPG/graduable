@@ -33,6 +33,8 @@ public class User {
     private int userSemester;    // 유저 현 학기 수
     private String googleId;
     private String email;
+    private Long yearOfSemester; // 현 학기가 몇년도인지 ex) 2025
+    private Long semesterInYear; // 현 학기가 1학기인지 2학기인지 ex) 1
 
     public User toEntity(UserDTO dto) {
         return User.builder()
@@ -41,6 +43,8 @@ public class User {
                 .userSemester(dto.getUserSemester())
                 .googleId(dto.getGoogleId())
                 .email(dto.getEmail())
+                .yearOfSemester(dto.getYearOfSemester())
+                .semesterInYear(dto.getSemesterInYear())
                 .build();
     }
 }

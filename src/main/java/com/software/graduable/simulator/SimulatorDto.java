@@ -21,7 +21,7 @@ public class SimulatorDto {
         public static class saveToRoadmap{
             private String googleId;
             private List<String> courseIdList;
-            private String semester;
+            private Long semester;
         }
     }
 
