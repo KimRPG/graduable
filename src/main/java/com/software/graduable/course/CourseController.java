@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("course")
+@RequestMapping("/course")
 public class CourseController {
     private final CourseService courseService;
 
@@ -18,5 +18,11 @@ public class CourseController {
     public ResponseEntity<?> findAllCourses(){
         List<Course> response = courseService.findAll();
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/insertAllData")
+    public ResponseEntity<?> insertAllData(){
+        courseService.insertAllData();
+        return ResponseEntity.ok(true);
     }
 }
