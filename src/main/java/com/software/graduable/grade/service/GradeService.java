@@ -2,6 +2,7 @@ package com.software.graduable.grade.service;
 
 import com.software.graduable.course.Course;
 import com.software.graduable.course.CourseJPA;
+import com.software.graduable.course.CourseService;
 import com.software.graduable.grade.GradeEntity;
 import com.software.graduable.grade.GradeJPA;
 import com.software.graduable.grade.dto.GradeDTO;
@@ -31,6 +32,7 @@ public class GradeService {
     private final UserJPA userJPA;
     private final PlannedCourseJPA plannedCourseJPA;
     private final CourseJPA courseJPA;
+    private final CourseService courseService;
     private final GradeDTOMapper gradeDTOMapper = new GradeDTOMapper();
     // 성적 등록
     @Transactional
@@ -69,16 +71,26 @@ public class GradeService {
         int userIndex = -1;
         for (int i = 0; i < semesterList.size(); i++) {
             YearSemester ys = semesterList.get(i);
-            if (ys.getYear() == user.getYearOfSemester() && ys.getSemester() == user.getUserSemester()) {
+            int sem = ys.getSemester();
+            if (sem == 0 || sem == 3 || sem == 4) {
+                continue; // 건너뛰기
+            }
+            if (ys.getYear() == user.getYearOfSemester() && sem == user.getUserSemester()) {
                 userIndex = i;
                 break;
             }
         }
 
+        // semesterIndexMap 만들 때도 무시할 학기 걸러서 넣기
         Map<YearSemester, Integer> semesterIndexMap = new LinkedHashMap<>();
         for (int i = 0; i < semesterList.size(); i++) {
-            int semesterOrder = (i - userIndex)-1;
-            semesterIndexMap.put(semesterList.get(i), semesterOrder);
+            YearSemester ys = semesterList.get(i);
+            int sem = ys.getSemester();
+            if (sem == 0 || sem == 3 || sem == 4) {
+                continue; // 건너뛰기
+            }
+            int semesterOrder = (i - userIndex) - 1;
+            semesterIndexMap.put(ys, semesterOrder);
         }
 
         List<PlannedCourse> plannedCourseList = new ArrayList<>();
@@ -87,22 +99,27 @@ public class GradeService {
             int year = entity.getYearCourseTaken();
             int semester = entity.getSemesterCourseTaken(); // 1 or 2
 
-            // 몇 번째 학기인지 확인
-            Long semesterOrder = Long.valueOf(semesterIndexMap.getOrDefault(new YearSemester(year, semester), null));
-
-            if (semesterOrder != null) {
-                Optional<Course> courseOpt = courseJPA.findByCourseNameContainingIgnoreCase(entity.getCourseName()).stream().findFirst();
-                Long courseId = courseOpt.map(Course::getCourseId).orElse(null);
-
-                PlannedCourse plannedCourse = new PlannedCourse(
-                        user,                       // 유저 객체
-                        semesterOrder,             // 몇 번째 학기인지
-                        courseId     // 과목 ID
-                );
-                plannedCourseList.add(plannedCourse);
-            } else {
+            Integer semesterOrderInt = semesterIndexMap.get(new YearSemester(year, semester));
+            if (semesterOrderInt == null) {
                 System.out.println("⚠️ 매핑되지 않은 학기: " + year + "년 " + semester + "학기");
+                continue;  // null이면 건너뛰기
             }
+            Long semesterOrder = semesterOrderInt.longValue();
+
+            Optional<Course> courseOpt = courseJPA.findByCourseNameContainingIgnoreCase(entity.getCourseName()).stream().findFirst();
+            Long courseId = -1L;
+            if (courseOpt.isEmpty()) {
+                courseId = courseService.addCourseAtGrade(entity);
+            } else {
+                courseId = courseOpt.get().getCourseId();
+            }
+
+            PlannedCourse plannedCourse = new PlannedCourse(
+                    user,                       // 유저 객체
+                    semesterOrder,              // 몇 번째 학기인지
+                    courseId                    // 과목 ID
+            );
+            plannedCourseList.add(plannedCourse);
         }
 
         plannedCourseJPA.saveAll(plannedCourseList);

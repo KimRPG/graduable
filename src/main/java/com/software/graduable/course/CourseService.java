@@ -1,5 +1,6 @@
 package com.software.graduable.course;
 
+import com.software.graduable.grade.GradeEntity;
 import jakarta.annotation.PostConstruct;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,12 @@ public class CourseService {
 
     public List<Course> findAll() {
         return courseJPA.findAll();
+    }
+
+    public Long addCourseAtGrade(GradeEntity grade){
+        Course course = new Course(grade.getCourseName(), grade.getCourseCode(), grade.getCategory(), grade.getCredit(), grade.getClassification());
+        courseJPA.save(course);
+        return course.getCourseId();
     }
 
     @PostConstruct
