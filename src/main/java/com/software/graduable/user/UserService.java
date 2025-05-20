@@ -54,10 +54,13 @@ public class UserService {
         return getUserInfo(googleId);
     }
 
-    public void deleteUser(String googleId) {
-        User user = jpa.findByGoogleId(googleId);
+    public void deleteUserCache(String googleID) {
+        User user = jpa.findByGoogleId(googleID);
         gradeJPA.deleteAllByUser(user);
         plannedCourseJPA.deleteByUser(user);
+    }
+    public void deleteUser(String googleId) {
+        deleteUserCache(googleId);
         jpa.deleteByGoogleId(googleId);
     }
 }

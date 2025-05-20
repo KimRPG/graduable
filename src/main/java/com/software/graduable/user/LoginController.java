@@ -42,4 +42,9 @@ public class LoginController {
     public void deleteUser(@PathVariable String googleId) {
         service.deleteUser(googleId);
     }
+
+    @DeleteMapping("/user/cache/{googleId}")
+    public void deleteUserCache(@PathVariable String googleId) {
+        service.deleteUserCache(googleId);
+    }
 }
