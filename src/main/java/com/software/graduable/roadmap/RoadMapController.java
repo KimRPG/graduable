@@ -21,6 +21,6 @@ public class RoadMapController {
     }
     @GetMapping("/road-map/now/{googleId}")
     public List<RoadMapSemesterDTO> getNowRoadMap(@PathVariable String googleId) {
-        return roadMapService.getNowSemester(googleId, 2025, 1);
+        return roadMapService.getNowSemester(googleId);
     }
 }

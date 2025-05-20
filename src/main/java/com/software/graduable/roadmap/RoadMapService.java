@@ -23,8 +23,10 @@ public class RoadMapService {
     private final PlannedCourseJPA plannedCourseJPA;
     private final CourseJPA courseJPA;
 
-    public  List<RoadMapSemesterDTO> getNowSemester(String googleId,int year,int semester) {
+    public  List<RoadMapSemesterDTO> getNowSemester(String googleId) {
         User user = userJPA.findByGoogleId(googleId);
+        int year = user.getYearOfSemester().intValue();
+        int semester = user.getSemesterInYear().intValue();
         return gradeJPA.findByUserAndYearCourseTakenAndSemesterCourseTaken(user, year, semester).stream()
                 .map(RoadMapSemesterDTO::toDto)
                 .toList();
