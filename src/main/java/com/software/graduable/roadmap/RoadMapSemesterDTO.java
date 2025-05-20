@@ -30,7 +30,7 @@ public class RoadMapSemesterDTO {
 
     public static RoadMapSemesterDTO toDto(Course course, User user, PlannedCourse plannedCourse) {
         int remain = user.getUserSemester() - plannedCourse.getSemester().intValue();
-        int year = 2025 + ((remain) / 2);
+        int year = 2025 - ((remain) / 2);
         int semester = remain % 2 != 1 ? 1 : 2;
         String yearAndSemester = year + "-" + semester;
 
