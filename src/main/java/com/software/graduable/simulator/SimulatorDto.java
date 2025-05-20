@@ -32,7 +32,7 @@ public class SimulatorDto {
             private String id;
             private String time;
             private String name;
-            private Long credit;
+            private Double credit;
             private String room;
             private String professor;
             private Boolean gradeType;
@@ -58,8 +58,8 @@ public class SimulatorDto {
         @Setter
         public static class graduateSimulation{
             private List<CategoryData> categoryData; // categoryData는 여러 개일 수 있으니까 List로
-            private Long totalCredit;
-            private Long attendedCredit;
+            private Double totalCredit;
+            private Double attendedCredit;
             private Double attendedCreditPercent;
             private Double leftCreditPercent;
 
@@ -67,12 +67,12 @@ public class SimulatorDto {
             @Setter
             public static class CategoryData {
                 private String name;
-                private Long maxCredit;
-                private Long attendedCredit;
+                private Double maxCredit;
+                private Double attendedCredit;
                 private Boolean isFinished;
             }
 
-            public graduateSimulation(List<CategoryData> categoryData, Long totalCredit, Long attendedCredit, Double attendedCreditPercent, Double leftCreditPercent) {
+            public graduateSimulation(List<CategoryData> categoryData, Double totalCredit, Double attendedCredit, Double attendedCreditPercent, Double leftCreditPercent) {
                 this.categoryData = categoryData;
                 this.totalCredit = totalCredit;
                 this.attendedCredit = attendedCredit;
