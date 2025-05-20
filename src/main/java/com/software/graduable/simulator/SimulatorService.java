@@ -23,11 +23,10 @@ public class SimulatorService {
 
     public void saveToRoadmap(SimulatorDto.request.saveToRoadmap request) {
         User user = userJPA.findByGoogleId(request.getGoogleId());
-        List<String> courseIdList = request.getCourseIdList();
+        List<Long> courseIdList = request.getCourseIdList();
         Long semester = request.getSemester();
 
-        for (String courseIdStr : courseIdList) {
-            Long courseId = Long.parseLong(courseIdStr);
+        for (Long courseId : courseIdList) {
             Course course = courseJPA.findById(courseId)
                     .orElseThrow(() -> new RuntimeException("과목 없음 (ID: " + courseId + ")"));
 
@@ -51,7 +50,7 @@ public class SimulatorService {
     public SimulatorDto.response.graduateSimulation graduateSimulation(SimulatorDto.request.graduateSimulation request){
         User user = userJPA.findByGoogleId(request.getGoogleId());
 
-        List<String> semesterList = request.getSemesterList();
+        List<Long> semesterList = request.getSemesterList();
 
         List<PlannedCourse> filteredCourses = user.getPlannedCourseList().stream()
                 .filter(plannedCourse -> semesterList.contains(plannedCourse.getSemester()))

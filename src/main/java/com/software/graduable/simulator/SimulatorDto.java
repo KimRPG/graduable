@@ -13,14 +13,14 @@ public class SimulatorDto {
         @Getter
         public static class graduateSimulation{
             private String googleId;
-            private List<String> semesterList;
+            private List<Long> semesterList;
         }
 
         @Getter
         @Setter
         public static class saveToRoadmap{
             private String googleId;
-            private List<String> courseIdList;
+            private List<Long> courseIdList;
             private Long semester;
         }
     }

@@ -39,7 +39,7 @@ public class GradeDTOMapper {
 
         if (category == null || grade == null) return Optional.empty();
 
-        int credit = parseInt(tokens[5]);
+        double credit = parseDouble(tokens[5]);
 
         return Optional.of(
                 GradeDTO.builder()
@@ -63,6 +63,19 @@ public class GradeDTOMapper {
     private static int parseIntSafe(String str) {
         try {
             return Integer.parseInt(str.trim());
+        } catch (NumberFormatException e) {
+            return 0;
+        }
+    }
+
+    private static double parseDouble(String raw) {
+        String numOnly = raw.trim().split("\\(")[0];
+        return parseDoubleSafe(numOnly);
+    }
+
+    private static double parseDoubleSafe(String str) {
+        try {
+            return Double.parseDouble(str.trim());
         } catch (NumberFormatException e) {
             return 0;
         }
