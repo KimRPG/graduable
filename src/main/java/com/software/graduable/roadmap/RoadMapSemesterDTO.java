@@ -16,14 +16,16 @@ public class RoadMapSemesterDTO {
     private String courseName;
     // 학점(설계)
     private int credit;
-    private String category;
+    //전공인지 교양인지
+    private boolean category;
     private String yearAndSemester;
 
     public static RoadMapSemesterDTO toDto(GradeEntity grade) {
+        boolean category = grade.getCategory().toCharArray()[0] == '전';
         return RoadMapSemesterDTO.builder()
                 .courseName(grade.getCourseName())
                 .credit(grade.getCredit())
-                .category(grade.getCategory())
+                .category(category)
                 .yearAndSemester(grade.getYearCourseTaken() + "-" + grade.getSemesterCourseTaken())
                 .build();
     }
@@ -34,10 +36,13 @@ public class RoadMapSemesterDTO {
         int semester = remain % 2 != 1 ? 1 : 2;
         String yearAndSemester = year + "-" + semester;
 
+        boolean category = course.getCategory().toCharArray()[0] == '전';
+
+
         return RoadMapSemesterDTO.builder()
                 .courseName(course.getCourseName())
                 .credit(course.getCredit().intValue())
-                .category(course.getCategory())
+                .category(category)
                 .yearAndSemester(yearAndSemester)
                 .build();
     }
