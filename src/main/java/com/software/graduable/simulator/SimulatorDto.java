@@ -8,7 +8,7 @@ import java.util.List;
 
 public class SimulatorDto {
 
-    public class request{
+    public static class request{
         @Setter
         @Getter
         public static class graduateSimulation{
