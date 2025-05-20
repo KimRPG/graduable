@@ -19,7 +19,7 @@ public class LoginController {
     private final GradeService gradeService;
 
     @PostMapping("/user/sign_up")
-    public void signUp(@RequestBody UserDTO dto)  {
+    public void signUp(@RequestBody UserDTO dto) {
         service.userSignUp(dto);
     }
 
@@ -35,6 +35,11 @@ public class LoginController {
 
     @PutMapping("/user/info/{googleId}")
     public UserInfoDTO userSemesterChange(@PathVariable String googleId, @RequestParam Integer semester) {
-        return service.putUserSemesterChange(googleId,semester);
+        return service.putUserSemesterChange(googleId, semester);
+    }
+
+    @DeleteMapping("/user/{googleId}")
+    public void deleteUser(@PathVariable String googleId) {
+        service.deleteUser(googleId);
     }
 }

@@ -49,4 +49,8 @@ public class UserService {
         }
         return getUserInfo(googleId);
     }
+
+    public void deleteUser(String googleId) {
+        jpa.deleteByGoogleId(googleId);
+    }
 }

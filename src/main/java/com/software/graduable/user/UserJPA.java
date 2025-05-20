@@ -11,4 +11,6 @@ public interface UserJPA extends JpaRepository<User, Long> {
     @Modifying
     @Query("UPDATE User u SET u.userSemester = :semester WHERE u.googleId = :googleId")
     void updateUserSemester(@Param("googleId") String googleId, @Param("semester") int semester);
+
+    void deleteByGoogleId(String googleId);
 }

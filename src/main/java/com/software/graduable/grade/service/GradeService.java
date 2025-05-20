@@ -31,12 +31,23 @@ public class GradeService {
         if (user == null) {
             throw new InvalidUserDataException("존재하지 않는 사용자입니다: " + googleId);
         }
-        List<GradeDTO> gradeDTOList = gradeDTOMapper.parseGradeDTO(text);
-        for (GradeDTO dto : gradeDTOList) {
-            GradeEntity entity = new GradeEntity().toEntity(dto);
-            entity.setUser(user);
-            gradeJPA.save(entity);
+        if(gradeJPA.findByUser(user).isEmpty()){
+            List<GradeDTO> gradeDTOList = gradeDTOMapper.parseGradeDTO(text);
+            for (GradeDTO dto : gradeDTOList) {
+                GradeEntity entity = new GradeEntity().toEntity(dto);
+                entity.setUser(user);
+                gradeJPA.save(entity);
+            }
+        }else{
+            gradeJPA.deleteAllByUser(user);
+            List<GradeDTO> gradeDTOList = gradeDTOMapper.parseGradeDTO(text);
+            for (GradeDTO dto : gradeDTOList) {
+                GradeEntity entity = new GradeEntity().toEntity(dto);
+                entity.setUser(user);
+                gradeJPA.save(entity);
+            }
         }
+
     }
 
     // 사용자의 모든 성적 조회
