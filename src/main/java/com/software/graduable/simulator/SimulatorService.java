@@ -84,19 +84,6 @@ public class SimulatorService {
             );
         }
 
-        List<GradeEntity> userGrades = user.getGradeList();
-        for (GradeEntity grade : userGrades) {
-            String category = grade.getClassification();
-
-            System.out.println(category);
-            Double credit = (double) grade.getCredit();
-
-            categoryAttendedCredits.put(
-                    category,
-                    categoryAttendedCredits.getOrDefault(category, 0.0) + credit
-            );
-        }
-
         List<SimulatorDto.response.graduateSimulation.CategoryData> categoryDataList = new ArrayList<>();
         for (String category : categoryAttendedCredits.keySet()) {
             Double attended = categoryAttendedCredits.get(category);
