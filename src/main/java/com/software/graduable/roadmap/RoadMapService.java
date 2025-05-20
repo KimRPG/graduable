@@ -46,6 +46,7 @@ public class RoadMapService {
 
         // 사용자의 모든 계획된 과목을 RoadMapSemesterDTO로 변환
         List<RoadMapSemesterDTO> plannedCourseDTOs = plannedCourseJPA.findByUser(user).stream()
+                .filter(plannedCourse -> plannedCourse.getSemester() >= user.getUserSemester())
                 .map(plannedCourse -> {
                     Course course = courseJPA.findById(plannedCourse.getCourseId())
                             .orElse(null);
