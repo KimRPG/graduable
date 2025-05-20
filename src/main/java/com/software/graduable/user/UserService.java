@@ -1,5 +1,7 @@
 package com.software.graduable.user;
 
+import com.software.graduable.grade.GradeJPA;
+import com.software.graduable.plannedCourse.PlannedCourseJPA;
 import com.software.graduable.user.dto.UserDTO;
 import com.software.graduable.user.dto.UserInfoDTO;
 import com.software.graduable.global.exception.exceptions.*;
@@ -14,6 +16,8 @@ import java.util.List;
 @Transactional
 public class UserService {
     private final UserJPA jpa;
+    private final GradeJPA gradeJPA;
+    private final PlannedCourseJPA plannedCourseJPA;
 
     public void userSignUp(UserDTO userDTO) {
         // 필수 데이터 검증
@@ -51,6 +55,9 @@ public class UserService {
     }
 
     public void deleteUser(String googleId) {
+        User user = jpa.findByGoogleId(googleId);
+        gradeJPA.deleteAllByUser(user);
+        plannedCourseJPA.deleteByUser(user);
         jpa.deleteByGoogleId(googleId);
     }
 }
