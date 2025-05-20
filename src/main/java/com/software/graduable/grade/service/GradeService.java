@@ -43,7 +43,7 @@ public class GradeService {
         // Hashset으로 중복 제거하면서 년도와 학기를 넣음
         Set<YearSemester> semesterSet = new HashSet<>();
         List<GradeDTO> gradeDTOList = gradeDTOMapper.parseGradeDTO(text);
-        if(gradeJPA.findByUser(user).isEmpty()){
+        if(gradeJPA.findByUser(user).isEmpty()) {
             for (GradeDTO dto : gradeDTOList) {
                 GradeEntity entity = new GradeEntity().toEntity(dto);
                 semesterSet.add(new YearSemester(entity.getYearCourseTaken(), entity.getSemesterCourseTaken()));
