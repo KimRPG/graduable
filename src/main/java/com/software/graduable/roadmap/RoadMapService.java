@@ -10,6 +10,8 @@ import com.software.graduable.plannedCourse.PlannedCourseJPA;
 import com.software.graduable.user.User;
 import com.software.graduable.user.UserJPA;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -66,6 +68,25 @@ public class RoadMapService {
         return groupedBySemester.entrySet().stream()
                 .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toList());
+    }
+
+    public ResponseEntity<?> patchRoadMapSemester(String googleId, RoadMapDTO.saveToRoadmap request) {
+        User user = userJPA.findByGoogleId(googleId);
+
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("There's no such id user");
+        }
+
+        List<PlannedCourse> plannedCourseList = plannedCourseJPA.findByUserAndSemester(user, request.getSemester());
+        plannedCourseJPA.deleteAll(plannedCourseList);
+
+        List<Long> courseIdList = request.getCourseIdList(); // 새로 들어갈 과목 ID 리스트
+        List<PlannedCourse> newCourses = courseIdList.stream()
+                .map(courseId -> new PlannedCourse(user, request.getSemester(), courseId))
+                .toList();
+
+        plannedCourseJPA.saveAll(newCourses);
+        return ResponseEntity.ok("RoadMap updated for semester " + request.getSemester());
     }
 
     @Transactional
