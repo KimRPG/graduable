@@ -68,28 +68,17 @@ public class GradeService {
             return Integer.compare(a.getSemester(), b.getSemester());              // 학기 오름차순
         });
 
-        int userIndex = -1;
-        for (int i = 0; i < semesterList.size(); i++) {
-            YearSemester ys = semesterList.get(i);
-            int sem = ys.getSemester();
-            if (sem == 0 || sem == 3 || sem == 4) {
-                continue; // 건너뛰기
-            }
-            if (ys.getYear() == user.getYearOfSemester() && sem == user.getUserSemester()) {
-                userIndex = i;
-                break;
-            }
-        }
-
-        // semesterIndexMap 만들 때도 무시할 학기 걸러서 넣기
+        // semesterIndexMap 만들 때 무시할 학기 걸러서 넣기
+        int counter = 0;
         Map<YearSemester, Integer> semesterIndexMap = new LinkedHashMap<>();
         for (int i = 0; i < semesterList.size(); i++) {
             YearSemester ys = semesterList.get(i);
             int sem = ys.getSemester();
             if (sem == 0 || sem == 3 || sem == 4) {
+                counter++;
                 continue; // 건너뛰기
             }
-            int semesterOrder = (i - userIndex) - 1;
+            int semesterOrder = i + 1 - counter;
             semesterIndexMap.put(ys, semesterOrder);
         }
 

@@ -31,7 +31,7 @@ public class RoadMapSemesterDTO {
                 .courseName(course.getCourseName())
                 .credit(course.getCredit())
                 .category(category)
-                .semester(plannedCourse.getSemester() + 1)
+                .semester(plannedCourse.getSemester())
                 .build();
     }
 }

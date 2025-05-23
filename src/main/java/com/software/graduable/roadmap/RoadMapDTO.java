@@ -17,4 +17,11 @@ public class RoadMapDTO {
         this.yearSemester = key;
         this.roadMapSemesterDTO = map.get(key);
     }
+
+    @Getter
+    @Setter
+    public static class saveToRoadmap{
+        private List<Long> courseIdList;
+        private Long semester;
+    }
 }
