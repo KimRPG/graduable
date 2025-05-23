@@ -32,18 +32,18 @@ public class RoadMapController {
         return roadMapService.deleteUserAndSemester(googleId, semester);
     }
 
-//    @GetMapping("/view-pdf")
-//    public void viewPdf(HttpServletResponse response) throws IOException {
-//        // PDF 파일 경로 또는 바이너리 데이터
-//        Path pdfPath = Paths.get("src/main/java/com/software/graduable/roadmap/practice.pdf");
-//
-//        // 응답 설정
-//        response.setContentType("application/pdf");
-//        response.setHeader("Content-Disposition", "inline; filename=example.pdf");
-//
-//        // PDF 파일을 스트림으로 복사
-//        Files.copy(pdfPath, response.getOutputStream());
-//        response.getOutputStream().flush();
-//    }
+    @GetMapping("/view-pdf")
+    public void viewPdf(HttpServletResponse response) throws IOException {
+        // PDF 파일 경로 또는 바이너리 데이터
+        Path pdfPath = Paths.get("src/main/java/com/software/graduable/roadmap/practice.pdf");
+
+        // 응답 설정
+        response.setContentType("application/pdf");
+        response.setHeader("Content-Disposition", "inline; filename=example.pdf");
+
+        // PDF 파일을 스트림으로 복사
+        Files.copy(pdfPath, response.getOutputStream());
+        response.getOutputStream().flush();
+    }
 
 }
