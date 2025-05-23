@@ -70,4 +70,15 @@ public class RoadMapService {
                 .sorted(Map.Entry.comparingByKey())
                 .collect(Collectors.toList());
     }
+
+    public boolean deleteUserAndSemester(String googleId, Long semester) {
+        User user = userJPA.findByGoogleId(googleId);
+        int userSemester = user.getUserSemester();
+        if (semester >= userSemester) {
+            plannedCourseJPA.deleteByUserAndSemester(user, semester);
+            return true;
+        }else {
+            return false;
+        }
+    }
 }
