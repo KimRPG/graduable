@@ -3,6 +3,8 @@ package com.software.graduable.roadmap;
 import com.software.graduable.grade.service.GradeService;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.util.StreamUtils;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
@@ -35,15 +37,13 @@ public class RoadMapController {
     @GetMapping("/view-pdf")
     public void viewPdf(HttpServletResponse response) throws IOException {
         // PDF 파일 경로 또는 바이너리 데이터
-        Path pdfPath = Paths.get("src/main/java/com/software/graduable/roadmap/practice.pdf");
+        ClassPathResource pdfFile = new ClassPathResource("practice.pdf");
 
-        // 응답 설정
         response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "inline; filename=example.pdf");
+        response.setHeader("Content-Disposition", "inline; filename=practice.pdf");
+        response.setContentLength((int) pdfFile.contentLength());
 
-        // PDF 파일을 스트림으로 복사
-        Files.copy(pdfPath, response.getOutputStream());
-        response.getOutputStream().flush();
+        StreamUtils.copy(pdfFile.getInputStream(), response.getOutputStream());
     }
 
 }
