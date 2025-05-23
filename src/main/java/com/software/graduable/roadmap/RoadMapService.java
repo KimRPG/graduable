@@ -26,45 +26,41 @@ public class RoadMapService {
 
     public  List<RoadMapSemesterDTO> getNowSemester(String googleId) {
         User user = userJPA.findByGoogleId(googleId);
-        int year = user.getYearOfSemester().intValue();
-        int semester = user.getSemesterInYear().intValue();
-        return gradeJPA.findByUserAndYearCourseTakenAndSemesterCourseTaken(user, year, semester).stream()
-                .map(RoadMapSemesterDTO::toDto)
+
+        return plannedCourseJPA.findByUserAndSemester(user,user.getUserSemester()).stream()
+                .map(plannedCourse -> {
+                    Course course = courseJPA.findById(plannedCourse.getCourseId())
+                            .orElse(null);
+                    return course != null ?
+                            RoadMapSemesterDTO.toDto(course, plannedCourse) :
+                            null;
+                })
                 .toList();
     }
 
 
-    public List<Map.Entry<String, List<RoadMapSemesterDTO>>> getAllSemestersWithGradesAndPlannedCourses(String googleId) {
+    public List<Map.Entry<Long, List<RoadMapSemesterDTO>>> getAllSemestersWithGradesAndPlannedCourses(String googleId) {
         User user = userJPA.findByGoogleId(googleId);
         if (user == null) {
             throw new InvalidUserDataException("존재하지 않는 사용자입니다: " + googleId);
         }
 
-        // 사용자의 모든 성적을 RoadMapSemesterDTO로 변환
-        List<RoadMapSemesterDTO> gradeDTOs = gradeJPA.findByUser(user).stream()
-                .map(RoadMapSemesterDTO::toDto)
-                .toList();
-
         // 사용자의 모든 계획된 과목을 RoadMapSemesterDTO로 변환
         List<RoadMapSemesterDTO> plannedCourseDTOs = plannedCourseJPA.findByUser(user).stream()
-                .filter(plannedCourse -> plannedCourse.getSemester() >= user.getUserSemester())
                 .map(plannedCourse -> {
                     Course course = courseJPA.findById(plannedCourse.getCourseId())
                             .orElse(null);
                     return course != null ?
-                            RoadMapSemesterDTO.toDto(course, user, plannedCourse) :
+                            RoadMapSemesterDTO.toDto(course, plannedCourse) :
                             null;
                 })
                 .filter(Objects::nonNull)
                 .toList();
 
         // 두 리스트를 합치고 학기별로 그룹화
-        List<RoadMapSemesterDTO> allDTOs = new ArrayList<>();
-        allDTOs.addAll(gradeDTOs);
-        allDTOs.addAll(plannedCourseDTOs);
 
-        Map<String, List<RoadMapSemesterDTO>> groupedBySemester = allDTOs.stream()
-                .collect(Collectors.groupingBy(RoadMapSemesterDTO::getYearAndSemester));
+        Map<Long, List<RoadMapSemesterDTO>> groupedBySemester = plannedCourseDTOs.stream()
+                .collect(Collectors.groupingBy(RoadMapSemesterDTO::getSemester));
 
         // 학기 순으로 정렬하여 반환
         return groupedBySemester.entrySet().stream()
@@ -73,14 +69,8 @@ public class RoadMapService {
     }
 
     @Transactional
-    public boolean deleteUserAndSemester(String googleId, Long semester) {
+    public void deleteUserAndSemester(String googleId, Long semester) {
         User user = userJPA.findByGoogleId(googleId);
-        int userSemester = user.getUserSemester();
-        if (semester >= userSemester) {
-            plannedCourseJPA.deleteByUserAndSemester(user, semester);
-            return true;
-        }else {
-            return false;
-        }
+        plannedCourseJPA.deleteByUserAndSemester(user, semester);
     }
 }

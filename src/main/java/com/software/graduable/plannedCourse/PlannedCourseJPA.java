@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface PlannedCourseJPA extends JpaRepository<PlannedCourse, Long> {
     List<PlannedCourse> findByUser(User user);
+    List<PlannedCourse> findByUserAndSemester(User user,int semester);
 
     void deleteByUser(User user);
 

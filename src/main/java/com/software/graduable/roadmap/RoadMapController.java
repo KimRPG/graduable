@@ -21,7 +21,7 @@ public class RoadMapController {
     private final GradeService gradeService;
 
     @GetMapping("/road-map/{googleId}")
-    public List<Map.Entry<String, List<RoadMapSemesterDTO>>> getRoadMap(@PathVariable String googleId) {
+    public List<Map.Entry<Long, List<RoadMapSemesterDTO>>> getRoadMap(@PathVariable String googleId) {
         return roadMapService.getAllSemestersWithGradesAndPlannedCourses(googleId);
     }
     @GetMapping("/road-map/now/{googleId}")
@@ -30,8 +30,8 @@ public class RoadMapController {
     }
 
     @DeleteMapping ("/road-map/{googleId}")
-    public boolean deleteRoadMap(@PathVariable String googleId, @RequestParam Long semester) {
-        return roadMapService.deleteUserAndSemester(googleId, semester);
+    public void deleteRoadMap(@PathVariable String googleId, @RequestParam Long semester) {
+        roadMapService.deleteUserAndSemester(googleId, semester - 1);
     }
 
 
