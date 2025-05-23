@@ -11,6 +11,7 @@ import com.software.graduable.user.User;
 import com.software.graduable.user.UserJPA;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -71,6 +72,7 @@ public class RoadMapService {
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public boolean deleteUserAndSemester(String googleId, Long semester) {
         User user = userJPA.findByGoogleId(googleId);
         int userSemester = user.getUserSemester();
