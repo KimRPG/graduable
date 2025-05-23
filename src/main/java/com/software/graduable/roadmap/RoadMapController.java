@@ -34,16 +34,5 @@ public class RoadMapController {
         return roadMapService.deleteUserAndSemester(googleId, semester);
     }
 
-    @GetMapping("/view-pdf")
-    public void viewPdf(HttpServletResponse response) throws IOException {
-        // PDF 파일 경로 또는 바이너리 데이터
-        ClassPathResource pdfFile = new ClassPathResource("practice.pdf");
-
-        response.setContentType("application/pdf");
-        response.setHeader("Content-Disposition", "inline; filename=practice.pdf");
-        response.setContentLength((int) pdfFile.contentLength());
-
-        StreamUtils.copy(pdfFile.getInputStream(), response.getOutputStream());
-    }
 
 }
