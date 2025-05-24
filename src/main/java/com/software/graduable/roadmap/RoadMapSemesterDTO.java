@@ -19,6 +19,7 @@ public class RoadMapSemesterDTO {
     //전공인지 교양인지
     private boolean category;
     private long semester;
+    private Long courseID;
 
 
 
@@ -32,6 +33,7 @@ public class RoadMapSemesterDTO {
                 .credit(course.getCredit())
                 .category(category)
                 .semester(plannedCourse.getSemester())
+                .courseID(course.getCourseId())
                 .build();
     }
 }
