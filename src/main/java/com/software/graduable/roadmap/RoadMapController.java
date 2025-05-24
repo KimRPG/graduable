@@ -40,7 +40,7 @@ public class RoadMapController {
 
     @DeleteMapping ("/road-map/{googleId}")
     public void deleteRoadMap(@PathVariable String googleId, @RequestParam Long semester) {
-        roadMapService.deleteUserAndSemester(googleId, semester - 1);
+        roadMapService.deleteUserAndSemester(googleId, semester);
     }
 
 
