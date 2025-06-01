@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-//@RestControllerAdvice(annotations = {RestController.class}, basePackageClasses = {GradeController.class, SimulatorController.class, LoginController.class})
+@RestControllerAdvice(annotations = {RestController.class}, basePackageClasses = {GradeController.class, SimulatorController.class, LoginController.class})
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)

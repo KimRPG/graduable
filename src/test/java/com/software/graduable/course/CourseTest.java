@@ -1,9 +1,16 @@
 package com.software.graduable.course;
 
+import com.software.graduable.config.IntegrationTestConfig;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.assertj.core.api.Assertions.assertThat;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ContextConfiguration;
 
+import static org.assertj.core.api.Assertions.assertThat;
+@SpringBootTest
+@AutoConfigureMockMvc
+@ContextConfiguration(classes = IntegrationTestConfig.class)
 class CourseTest {
 
     @Test
