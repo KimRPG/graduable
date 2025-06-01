@@ -1,11 +1,16 @@
 plugins {
 	id 'java'
+	id 'jacoco'
 	id 'org.springframework.boot' version '3.4.4'
 	id 'io.spring.dependency-management' version '1.1.7'
 }
 
 group = 'com.software'
 version = '0.0.1-SNAPSHOT'
+
+jacoco {
+	toolVersion = "0.8.10"
+}
 
 java {
 	toolchain {
@@ -34,7 +39,32 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
-
 tasks.named('test') {
 	useJUnitPlatform()
+	testLogging {
+		events "passed", "skipped", "failed"
+	}
+	reports {
+		junitXml.required.set(true)
+		html.required.set(true)
+		html.outputLocation.set(file("$buildDir/reports/tests"))
+	}
 }
+
+//tasks.named('jacocoTestReport') {
+//	dependsOn test
+//
+//	reports {
+//		xml.required.set(true)
+//		html.required.set(true)
+//		html.outputLocation.set(file("$buildDir/reports/jacoco/test"))
+//	}
+//
+//	classDirectories.setFrom(
+//			files(sourceSets.main.output.classesDirs)
+//	)
+//	sourceDirectories.setFrom(
+//			files(sourceSets.main.allSource.srcDirs)
+//	)
+//	executionData.setFrom(fileTree(buildDir).include("**/jacoco/test.exec"))
+//}
