@@ -51,20 +51,20 @@ tasks.named('test') {
 	}
 }
 
-//tasks.named('jacocoTestReport') {
-//	dependsOn test
-//
-//	reports {
-//		xml.required.set(true)
-//		html.required.set(true)
-//		html.outputLocation.set(file("$buildDir/reports/jacoco/test"))
-//	}
-//
-//	classDirectories.setFrom(
-//			files(sourceSets.main.output.classesDirs)
-//	)
-//	sourceDirectories.setFrom(
-//			files(sourceSets.main.allSource.srcDirs)
-//	)
-//	executionData.setFrom(fileTree(buildDir).include("**/jacoco/test.exec"))
-//}
+tasks.named('jacocoTestReport') {
+	dependsOn test
+
+	reports {
+		xml.required.set(true)
+		html.required.set(true)
+		html.outputLocation.set(file("$buildDir/reports/jacoco/test"))
+	}
+
+	classDirectories.setFrom(
+			files(sourceSets.main.output.classesDirs)
+	)
+	sourceDirectories.setFrom(
+			files(sourceSets.main.allSource.srcDirs)
+	)
+	executionData.setFrom(fileTree(buildDir).include("**/jacoco/test.exec"))
+}
